@@ -3,8 +3,6 @@ const input = await Deno.readTextFile("./input.txt");
 
 const list: string[][] = input.split("\n").map((s) => s.split(" = "));
 
-console.log(list);
-
 type MaskItem = {
   value: 0 | 1;
   index: number;
@@ -26,7 +24,6 @@ list.forEach((value) => {
       }
     });
     currentMask = currentMask.sort((a, b) => b.index - a.index);
-    console.log("new mask", currentMask);
   } else {
     // "mem" value
     const memLocation = parseInt(
@@ -41,12 +38,8 @@ list.forEach((value) => {
     currentMask.forEach(
       ({ value, index }) => (binaryArr[index] = value.toString())
     );
-    console.log(memLocation);
-    console.log("before", binaryVal);
-    console.log("after ", binaryArr.join(""));
     const decVal = parseInt(binaryArr.join(""), 2);
     memory.set(memLocation, decVal);
-    console.log("decimal", decVal);
   }
 });
 
